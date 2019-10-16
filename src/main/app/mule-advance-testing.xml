@@ -33,10 +33,6 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
             <db:parameterized-query><![CDATA[SELECT * FROM FLIGHTS]]></db:parameterized-query>
         </db:select>
         <json:object-to-json-transformer doc:name="Object to JSON"/>
-        <jms:outbound-endpoint exchange-pattern="request-response" queue="flights" connector-ref="Active_MQ" doc:name="JMS"/>
-    </flow>
-    <flow name="logFlights">
-        <jms:outbound-endpoint exchange-pattern="request-response" queue="flights" connector-ref="Active_MQ" doc:name="JMS"/>
-        <logger level="INFO" doc:name="Logger" message="#[message.payload]"/>
+        <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
     </flow>
 </mule>
